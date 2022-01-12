@@ -15,12 +15,24 @@ LAUTEQAudioProcessorEditor::LAUTEQAudioProcessorEditor (LAUTEQHIGHCUTAudioProces
 {
     auto tapImage = juce::ImageCache::getFromMemory(BinaryData::Knob1_png, BinaryData::Knob1_pngSize);
     
+    
     if(! tapImage.isNull())
         mImageComponent.setImage (tapImage, juce::RectanglePlacement::stretchToFit);
     else
         jassert (! tapImage.isNull());
+    
     addAndMakeVisible(mImageComponent);
     
+//    
+//    auto LogoImage = juce::ImageCache::getFromMemory(BinaryData::Logo_jpg, BinaryData::Logo_jpgSize);
+//
+//    if(! LogoImage.isNull())
+//        mImageComponent.setImage (LogoImage, juce::RectanglePlacement::stretchToFit);
+//    else
+//        jassert (! LogoImage.isNull());
+//    
+//    addAndMakeVisible(mImageComponent);
+//    
     
 //     Make sure that before the constructor has finished, you've set the
 //     editor's size to whatever you need it to be.

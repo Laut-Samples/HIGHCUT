@@ -14,6 +14,7 @@
       <FILE id="Lee3Cx" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <GROUP id="{512FC133-3F13-228D-A70F-8A5B9CFB9464}" name="Resources">
+      <FILE id="sPgNwx" name="Logo.jpg" compile="0" resource="1" file="Resources/Logo.jpg"/>
       <FILE id="mxmP9W" name="Knob1.png" compile="0" resource="1" file="Resources/Knob1.png"/>
     </GROUP>
   </MAINGROUP>
