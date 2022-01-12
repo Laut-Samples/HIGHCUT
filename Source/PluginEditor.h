@@ -11,14 +11,23 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+struct CustomRotarySlider : juce::Slider
+{
+    CustomRotarySlider() : juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag,
+                                        juce::Slider::TextEntryBoxPosition::NoTextBox)
+    {
+        
+    }
+};
+
 //==============================================================================
 /**
 */
-class LAUTEQAudioProcessorEditor  : public juce::AudioProcessorEditor
+class LAUTEQHIGHCUTAudioProcessorEditor  : public juce::AudioProcessorEditor
 {
 public:
-    LAUTEQAudioProcessorEditor (LAUTEQHIGHCUTAudioProcessor&);
-    ~LAUTEQAudioProcessorEditor() override;
+    LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGHCUTAudioProcessor&);
+    ~LAUTEQHIGHCUTAudioProcessorEditor() override;
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -29,9 +38,19 @@ private:
     // access the processor object that created it.
     LAUTEQHIGHCUTAudioProcessor& audioProcessor;
     
+    // Image
     juce::ImageComponent mImageComponent;
     
+    //Slider
+    CustomRotarySlider highCutFreqSlider;
+    
+    std::vector<juce::Component*>getComps();
+    
+    using APVTS = juce::AudioProcessorValueTreeState;
+    using Attachment = APVTS::SliderAttachment;
+    
+    Attachment highCutFreqSliderAttachment;
     
 //    juce::ImageComponent oImageComponent;
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LAUTEQAudioProcessorEditor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LAUTEQHIGHCUTAudioProcessorEditor)
 };

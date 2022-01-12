@@ -10,9 +10,15 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-LAUTEQAudioProcessorEditor::LAUTEQAudioProcessorEditor (LAUTEQHIGHCUTAudioProcessor& p)
-    : AudioProcessorEditor (&p), audioProcessor (p)
+LAUTEQHIGHCUTAudioProcessorEditor::LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGHCUTAudioProcessor& p)
+    : AudioProcessorEditor (&p), audioProcessor (p),
+
+highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider)
+
 {
+    
+    //IMAGE
+    
     auto tapImage = juce::ImageCache::getFromMemory(BinaryData::Knob1_png, BinaryData::Knob1_pngSize);
     
     
@@ -23,15 +29,15 @@ LAUTEQAudioProcessorEditor::LAUTEQAudioProcessorEditor (LAUTEQHIGHCUTAudioProces
     
     addAndMakeVisible(mImageComponent);
     
-//    
-//    auto LogoImage = juce::ImageCache::getFromMemory(BinaryData::Logo_jpg, BinaryData::Logo_jpgSize);
-//
-//    if(! LogoImage.isNull())
-//        mImageComponent.setImage (LogoImage, juce::RectanglePlacement::stretchToFit);
-//    else
-//        jassert (! LogoImage.isNull());
-//    
-//    addAndMakeVisible(mImageComponent);
+    // SLIDER
+    
+    for( auto* comp : getComps() )
+    {
+        addAndMakeVisible (comp);
+        
+    }
+    
+    
 //    
     
 //     Make sure that before the constructor has finished, you've set the
@@ -39,12 +45,12 @@ LAUTEQAudioProcessorEditor::LAUTEQAudioProcessorEditor (LAUTEQHIGHCUTAudioProces
     setSize (500, 400);
 }
 
-LAUTEQAudioProcessorEditor::~LAUTEQAudioProcessorEditor()
+LAUTEQHIGHCUTAudioProcessorEditor::~LAUTEQHIGHCUTAudioProcessorEditor()
 {
 }
 
 //==============================================================================
-void LAUTEQAudioProcessorEditor::paint (juce::Graphics& g)
+void LAUTEQHIGHCUTAudioProcessorEditor::paint (juce::Graphics& g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
 //    g.fillAll (getLookAndFeel().findColour (juce::ResizableWindow::backgroundColourId));
@@ -55,10 +61,26 @@ void LAUTEQAudioProcessorEditor::paint (juce::Graphics& g)
     
 }
 
-void LAUTEQAudioProcessorEditor::resized()
+void LAUTEQHIGHCUTAudioProcessorEditor::resized()
 {
+    
     // This is generally where you'll want to lay out the positions of any
     // subcomponents in your editor..
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
+    
+    
+    highCutFreqSlider.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
+    highCutFreqSlider.setCentrePosition(250, 200);
+    
+    
+}
+
+    
+    std::vector<juce::Component*>LAUTEQHIGHCUTAudioProcessorEditor::getComps()
+{
+    return
+    {
+        &highCutFreqSlider,
+    };
     
 }

@@ -187,7 +187,7 @@ bool LAUTEQHIGHCUTAudioProcessor::hasEditor() const
 juce::AudioProcessorEditor* LAUTEQHIGHCUTAudioProcessor::createEditor()
 
 {
-        return new LAUTEQAudioProcessorEditor (*this);
+        return new LAUTEQHIGHCUTAudioProcessorEditor (*this);
 //    return new juce::GenericAudioProcessorEditor(*this);
 }
 
