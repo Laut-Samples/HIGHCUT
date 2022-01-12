@@ -32,12 +32,12 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 //==============================================================================
 /**
 */
-class LAUTEQAudioProcessor  : public juce::AudioProcessor
+class LAUTEQHIGHCUTAudioProcessor  : public juce::AudioProcessor
 {
 public:
     //==============================================================================
-    LAUTEQAudioProcessor();
-    ~LAUTEQAudioProcessor() override;
+    LAUTEQHIGHCUTAudioProcessor();
+    ~LAUTEQHIGHCUTAudioProcessor() override;
 
     //==============================================================================
     void prepareToPlay (double sampleRate, int samplesPerBlock) override;
@@ -148,5 +148,5 @@ private:
     void updateFilters();
     
     //==============================================================================
-    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LAUTEQAudioProcessor)
+    JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LAUTEQHIGHCUTAudioProcessor)
 };

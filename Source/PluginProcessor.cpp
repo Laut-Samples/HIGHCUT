@@ -10,7 +10,7 @@
 #include "PluginEditor.h"
 
 //==============================================================================
-LAUTEQAudioProcessor::LAUTEQAudioProcessor()
+LAUTEQHIGHCUTAudioProcessor::LAUTEQHIGHCUTAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
      : AudioProcessor (BusesProperties()
                      #if ! JucePlugin_IsMidiEffect
@@ -24,17 +24,17 @@ LAUTEQAudioProcessor::LAUTEQAudioProcessor()
 {
 }
 
-LAUTEQAudioProcessor::~LAUTEQAudioProcessor()
+LAUTEQHIGHCUTAudioProcessor::~LAUTEQHIGHCUTAudioProcessor()
 {
 }
 
 //==============================================================================
-const juce::String LAUTEQAudioProcessor::getName() const
+const juce::String LAUTEQHIGHCUTAudioProcessor::getName() const
 {
     return JucePlugin_Name;
 }
 
-bool LAUTEQAudioProcessor::acceptsMidi() const
+bool LAUTEQHIGHCUTAudioProcessor::acceptsMidi() const
 {
    #if JucePlugin_WantsMidiInput
     return true;
@@ -43,7 +43,7 @@ bool LAUTEQAudioProcessor::acceptsMidi() const
    #endif
 }
 
-bool LAUTEQAudioProcessor::producesMidi() const
+bool LAUTEQHIGHCUTAudioProcessor::producesMidi() const
 {
    #if JucePlugin_ProducesMidiOutput
     return true;
@@ -52,7 +52,7 @@ bool LAUTEQAudioProcessor::producesMidi() const
    #endif
 }
 
-bool LAUTEQAudioProcessor::isMidiEffect() const
+bool LAUTEQHIGHCUTAudioProcessor::isMidiEffect() const
 {
    #if JucePlugin_IsMidiEffect
     return true;
@@ -61,37 +61,37 @@ bool LAUTEQAudioProcessor::isMidiEffect() const
    #endif
 }
 
-double LAUTEQAudioProcessor::getTailLengthSeconds() const
+double LAUTEQHIGHCUTAudioProcessor::getTailLengthSeconds() const
 {
     return 0.0;
 }
 
-int LAUTEQAudioProcessor::getNumPrograms()
+int LAUTEQHIGHCUTAudioProcessor::getNumPrograms()
 {
     return 1;   // NB: some hosts don't cope very well if you tell them there are 0 programs,
                 // so this should be at least 1, even if you're not really implementing programs.
 }
 
-int LAUTEQAudioProcessor::getCurrentProgram()
+int LAUTEQHIGHCUTAudioProcessor::getCurrentProgram()
 {
     return 0;
 }
 
-void LAUTEQAudioProcessor::setCurrentProgram (int index)
+void LAUTEQHIGHCUTAudioProcessor::setCurrentProgram (int index)
 {
 }
 
-const juce::String LAUTEQAudioProcessor::getProgramName (int index)
+const juce::String LAUTEQHIGHCUTAudioProcessor::getProgramName (int index)
 {
     return {};
 }
 
-void LAUTEQAudioProcessor::changeProgramName (int index, const juce::String& newName)
+void LAUTEQHIGHCUTAudioProcessor::changeProgramName (int index, const juce::String& newName)
 {
 }
 
 //==============================================================================
-void LAUTEQAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
+void LAUTEQHIGHCUTAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
@@ -112,14 +112,14 @@ void LAUTEQAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock
     
 }
 
-void LAUTEQAudioProcessor::releaseResources()
+void LAUTEQHIGHCUTAudioProcessor::releaseResources()
 {
     // When playback stops, you can use this as an opportunity to free up any
     // spare memory, etc.
 }
 
 #ifndef JucePlugin_PreferredChannelConfigurations
-bool LAUTEQAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
+bool LAUTEQHIGHCUTAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) const
 {
   #if JucePlugin_IsMidiEffect
     juce::ignoreUnused (layouts);
@@ -144,7 +144,7 @@ bool LAUTEQAudioProcessor::isBusesLayoutSupported (const BusesLayout& layouts) c
 }
 #endif
 
-void LAUTEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
+void LAUTEQHIGHCUTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce::MidiBuffer& midiMessages)
 {
     
     
@@ -179,27 +179,27 @@ void LAUTEQAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce:
 }
 
 //==============================================================================
-bool LAUTEQAudioProcessor::hasEditor() const
+bool LAUTEQHIGHCUTAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
 }
 
-juce::AudioProcessorEditor* LAUTEQAudioProcessor::createEditor()
+juce::AudioProcessorEditor* LAUTEQHIGHCUTAudioProcessor::createEditor()
 
 {
-    //    return new LAUTEQAudioProcessorEditor (*this);
-    return new juce::GenericAudioProcessorEditor(*this);
+        return new LAUTEQAudioProcessorEditor (*this);
+//    return new juce::GenericAudioProcessorEditor(*this);
 }
 
 //==============================================================================
-void LAUTEQAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
+void LAUTEQHIGHCUTAudioProcessor::getStateInformation (juce::MemoryBlock& destData)
 {
     // You should use this method to store your parameters in the memory block.
     // You could do that either as raw data, or use the XML or ValueTree classes
     // as intermediaries to make it easy to save and load complex data.
 }
 
-void LAUTEQAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
+void LAUTEQHIGHCUTAudioProcessor::setStateInformation (const void* data, int sizeInBytes)
 {
     // You should use this method to restore your parameters from this memory block,
     // whose contents will have been created by the getStateInformation() call.
@@ -222,7 +222,7 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
 
 // PEAK
 
-void LAUTEQAudioProcessor::updatePeakFilter(const ChainSettings &chainSettings)
+void LAUTEQHIGHCUTAudioProcessor::updatePeakFilter(const ChainSettings &chainSettings)
 {
     auto peakCoefficients = juce::dsp::IIR::Coefficients<float>::makePeakFilter(getSampleRate(),
                                                                                 chainSettings.peakFreq,
@@ -233,14 +233,14 @@ void LAUTEQAudioProcessor::updatePeakFilter(const ChainSettings &chainSettings)
     updateCoefficients(rightChain.template get<ChainPositions::Peak>().coefficients, peakCoefficients);
 }
 
-void LAUTEQAudioProcessor::updateCoefficients(Coefficients& old, const Coefficients& replacements)
+void LAUTEQHIGHCUTAudioProcessor::updateCoefficients(Coefficients& old, const Coefficients& replacements)
     {
         *old = *replacements;
     }
 
 //LOWCUT
 
-void LAUTEQAudioProcessor::updateLowCutFilters(const ChainSettings &chainSettings)
+void LAUTEQHIGHCUTAudioProcessor::updateLowCutFilters(const ChainSettings &chainSettings)
 {
     auto cutCoefficients = juce::dsp::FilterDesign<float>::designIIRHighpassHighOrderButterworthMethod(chainSettings.lowCutFreq, getSampleRate(), 2 * (chainSettings.lowCutSlope +1));
     
@@ -256,7 +256,7 @@ void LAUTEQAudioProcessor::updateLowCutFilters(const ChainSettings &chainSetting
 
 // HIGHCUT
 
-    void LAUTEQAudioProcessor::updateHighCutFilters(const ChainSettings &chainSettings)
+    void LAUTEQHIGHCUTAudioProcessor::updateHighCutFilters(const ChainSettings &chainSettings)
 {
     
     auto highCutCoefficients = juce::dsp::FilterDesign<float>::designIIRLowpassHighOrderButterworthMethod(chainSettings.highCutFreq,
@@ -274,7 +274,7 @@ void LAUTEQAudioProcessor::updateLowCutFilters(const ChainSettings &chainSetting
 
 // Update Filters
 
-void LAUTEQAudioProcessor::updateFilters()
+void LAUTEQHIGHCUTAudioProcessor::updateFilters()
 {
     auto chainSettings = getChainSettings(apvts);
     
@@ -285,7 +285,7 @@ void LAUTEQAudioProcessor::updateFilters()
 
 
 
-    juce::AudioProcessorValueTreeState::ParameterLayout LAUTEQAudioProcessor::createParameterLayout()
+    juce::AudioProcessorValueTreeState::ParameterLayout LAUTEQHIGHCUTAudioProcessor::createParameterLayout()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     
@@ -335,5 +335,5 @@ void LAUTEQAudioProcessor::updateFilters()
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
-    return new LAUTEQAudioProcessor();
+    return new LAUTEQHIGHCUTAudioProcessor();
 }
