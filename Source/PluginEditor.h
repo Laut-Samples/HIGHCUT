@@ -11,6 +11,22 @@
 #include <JuceHeader.h>
 #include "PluginProcessor.h"
 
+struct LookAndFeel : juce::LookAndFeel_V4
+{
+    void drawToggleButton (juce::Graphics &g,
+                           juce::ToggleButton & toggleButton);
+    
+    
+};
+
+
+//==============================================================================
+struct ComboBox : juce::ComboBox
+{
+    
+};
+
+//  ==============================================================================
 struct CustomRotarySlider : juce::Slider
 {
     CustomRotarySlider() : juce::Slider(juce::Slider::SliderStyle::RotaryHorizontalVerticalDrag,
@@ -19,6 +35,8 @@ struct CustomRotarySlider : juce::Slider
         
     }
 };
+
+
 
 //==============================================================================
 /**
@@ -36,21 +54,34 @@ public:
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
+//    Placeholder controlBar;
+//    GlobalControls globalControls;
+    
     LAUTEQHIGHCUTAudioProcessor& audioProcessor;
     
     // Image
     juce::ImageComponent mImageComponent;
     
     //Slider
-    CustomRotarySlider highCutFreqSlider;
+    CustomRotarySlider highCutFreqSlider, highCutSlope;
+    
     
     std::vector<juce::Component*>getComps();
     
     using APVTS = juce::AudioProcessorValueTreeState;
-    using Attachment = APVTS::SliderAttachment;
+   
+    using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
+//    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> highCutSlopeAttachment;
     
     Attachment highCutFreqSliderAttachment;
+    Attachment highCutSlopeAttachment;
     
-//    juce::ImageComponent oImageComponent;
+//    juce::ComboBoxParameterAttachment
+    
+    
+    ComboBox FilterTypes;
+    
+    
+   
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (LAUTEQHIGHCUTAudioProcessorEditor)
 };

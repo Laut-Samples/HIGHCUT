@@ -9,6 +9,7 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+
 //==============================================================================
 LAUTEQHIGHCUTAudioProcessor::LAUTEQHIGHCUTAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
@@ -233,6 +234,7 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
     
     return settings;
 }
+
 
 // PEAK
 

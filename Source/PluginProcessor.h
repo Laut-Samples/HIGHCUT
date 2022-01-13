@@ -29,6 +29,7 @@ struct ChainSettings
 
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 
+
 //==============================================================================
 /**
 */
@@ -76,6 +77,7 @@ public:
     
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
     
+//    juce::AudioProcessorValueTreeState tree; 
     
 private:
     using Filter = juce::dsp::IIR::Filter<float>;
@@ -106,6 +108,9 @@ private:
     }
     
     template<typename ChainType, typename CoefficientsType>
+    
+    
+    
     void updateCutFilter(ChainType& leftLowCut,
                          const CoefficientsType& cutCoefficients,
                          const Slope& lowCutSlope)
