@@ -18,6 +18,7 @@ LAUTEQHIGHCUTAudioProcessorEditor::LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGH
 
 highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider),
 highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
+
 {
     
     //IMAGE
@@ -49,16 +50,21 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     
     // COMBOBOX FilterTypes
     
+    
     addAndMakeVisible(highCutSlope);
+    
 
     addAndMakeVisible(FilterTypes);
-    FilterTypes.setName("FILTERTYPES");
+    FilterTypes.setName("FilterTypes");
     
     FilterTypes.addItem ("12 db/Oct",  1);
     FilterTypes.addItem ("24 db/Oct",  2);
     FilterTypes.addItem ("36 db/Oct", 3);
     FilterTypes.addItem ("48 db/Oct", 4);
     FilterTypes.setSelectedId(1);
+//    FilterTypes.addItemList(const StringArray &stringArray, int CFStringRef)
+    
+//    makeAttachmentHelper(highCutSlopeAttachment, Names::highCutSlope, db/Oct);
     
     comboBox:   
 //    FilterTypes = new juce::AudioProcessorValueTreeState::ComboBoxAttachment
@@ -108,8 +114,8 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     
     auto bounds = getLocalBounds();
     
-//    highCutSlope.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
-//    highCutSlope.setCentrePosition(200, 200);
+    highCutSlope.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
+    highCutSlope.setCentrePosition(200, 200);
     
     /// ComboBOX FilterTypes
     
@@ -137,7 +143,8 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     return
     {
         &highCutFreqSlider,
-        &highCutSlope,
+//        &highCutSlope,
     };
     
 }
+    

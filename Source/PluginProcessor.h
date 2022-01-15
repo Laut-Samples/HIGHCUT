@@ -10,6 +10,8 @@
 
 #include <JuceHeader.h>
 
+//Filter Types
+
 enum Slope
 {
     Slope_12,
@@ -19,6 +21,8 @@ enum Slope
     
 };
 
+// Chain Settings
+
 struct ChainSettings
 {
     float peakFreq { 0 }, peakGainInDecibels{0}, peakQuality {1.f};
@@ -26,6 +30,7 @@ struct ChainSettings
     
     Slope lowCutSlope {Slope::Slope_12}, highCutSlope {Slope::Slope_12};
 };
+
 
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 
@@ -73,7 +78,9 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
 
-    static juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
+    
+    juce::AudioProcessorValueTreeState::ComboBoxAttachment createParameter();
     
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
     
@@ -86,6 +93,8 @@ private:
     
     using MonoChain = juce::dsp::ProcessorChain<CutFilter, Filter, CutFilter>;
     
+    using AlertWindow = juce::AlertWindow;
+    
     MonoChain leftChain, rightChain;
     
     enum ChainPositions
@@ -97,7 +106,10 @@ private:
     
     
     void updatePeakFilter(const ChainSettings& chainSettings);
+    
+    
     using Coefficients = Filter::CoefficientsPtr;
+    
     static void updateCoefficients(Coefficients& old, const Coefficients& replacements);
     
     template<int Index, typename ChainType, typename CoefficientsType>

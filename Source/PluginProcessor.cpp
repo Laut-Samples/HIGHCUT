@@ -177,6 +177,8 @@ void LAUTEQHIGHCUTAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer
     leftChain.process(leftContext);
     rightChain.process(rightContext);
     
+    
+    
 }
 
 //==============================================================================
@@ -218,6 +220,8 @@ void LAUTEQHIGHCUTAudioProcessor::setStateInformation (const void* data, int siz
         updateFilters();
     }
     
+    
+    // Chain Settings
 }
 
 ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
@@ -234,6 +238,7 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
     
     return settings;
 }
+
 
 
 // PEAK
@@ -300,6 +305,7 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
 }
 
 
+// Parameter
 
     juce::AudioProcessorValueTreeState::ParameterLayout LAUTEQHIGHCUTAudioProcessor::createParameterLayout()
 {
@@ -330,6 +336,9 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
                                                            juce::NormalisableRange<float>(0.1f, 10.f, 0.05f, 1.f),
                                                            1.f));
     
+    
+    // FilterTypes
+    
     juce::StringArray stringArray;
     for( int i = 0; i < 4; ++i )
     {
@@ -343,10 +352,18 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
     layout.add(std::make_unique<juce::AudioParameterChoice>("LowCut Slope", "LowCut Slope", stringArray, 0 ));
     layout.add(std::make_unique<juce::AudioParameterChoice>("HighCut Slope", "HighCut Slope", stringArray, 0 ));
     
+    
+    
+    
     return layout;
 }
 
 
+//    juce::AudioProcessorValueTreeState::ComboBoxAttachment LAUTEQHIGHCUTAudioProcessor::createParameter()
+//
+//{
+//
+//}
 //==============================================================================
 // This creates new instances of the plugin..
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()

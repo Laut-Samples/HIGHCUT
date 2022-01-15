@@ -42,6 +42,7 @@ struct CustomRotarySlider : juce::Slider
 /**
 */
 class LAUTEQHIGHCUTAudioProcessorEditor  : public juce::AudioProcessorEditor
+
 {
 public:
     LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGHCUTAudioProcessor&);
@@ -50,7 +51,12 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    
+//    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> highCutSlope;
+    
+    
 
+    
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -65,6 +71,9 @@ private:
     //Slider
     CustomRotarySlider highCutFreqSlider, highCutSlope;
     
+    ComboBox FilterTypes;
+    
+    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> FilterTypesAttachment;
     
     std::vector<juce::Component*>getComps();
     
@@ -76,10 +85,13 @@ private:
     Attachment highCutFreqSliderAttachment;
     Attachment highCutSlopeAttachment;
     
+    
+//    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> highCutSlope;
+    
+    
 //    juce::ComboBoxParameterAttachment
     
     
-    ComboBox FilterTypes;
     
     
    
