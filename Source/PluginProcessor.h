@@ -105,6 +105,8 @@ private:
     };
     
     
+    
+    
     void updatePeakFilter(const ChainSettings& chainSettings);
     
     
