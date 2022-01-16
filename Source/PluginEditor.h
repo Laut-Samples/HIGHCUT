@@ -69,11 +69,15 @@ private:
     juce::ImageComponent mImageComponent;
     
     //Slider
-    CustomRotarySlider highCutFreqSlider, highCutSlope;
+    CustomRotarySlider highCutFreqSlider, highCutSlope, lowCutFreqSlider;
+    
     
     ComboBox FilterTypes;
     
+    ComboBox FilterArt;
+    
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> FilterTypesAttachment;
+
     
     std::vector<juce::Component*>getComps();
     
@@ -83,8 +87,7 @@ private:
     
     Attachment highCutFreqSliderAttachment;
     Attachment highCutSlopeAttachment;
-    
-    
+//    Attachment lowCutFreqSliderAttachment;
     
     
     

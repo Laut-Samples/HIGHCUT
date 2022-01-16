@@ -19,6 +19,8 @@ LAUTEQHIGHCUTAudioProcessorEditor::LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGH
 highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider),
 highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
 
+//lowCutFreqSliderAttachment(audioProcessor.apvts, "LowCut Freq", lowCutFreqSlider)
+
 {
     
     //IMAGE
@@ -50,20 +52,28 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     
     FilterTypesAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor. apvts, "HighCut Slope", FilterTypes);
     
-    
     addAndMakeVisible(highCutSlope);
     
-
     addAndMakeVisible(FilterTypes);
     FilterTypes.setName("FilterTypes");
     
-    FilterTypes.addItem ("12 db/Oct",  1);
-    FilterTypes.addItem ("24 db/Oct",  2);
+    FilterTypes.addItem ("12 db/Oct", 1);
+    FilterTypes.addItem ("24 db/Oct", 2);
     FilterTypes.addItem ("36 db/Oct", 3);
     FilterTypes.addItem ("48 db/Oct", 4);
     FilterTypes.setSelectedId(1);
 
-
+    // Combobox FilterArt
+    
+    addAndMakeVisible(FilterArt);
+    
+//    FilterArtAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor. apvts, "Filter Slope", FilterArt);
+//
+    FilterArt.addItem ("HighCut",  1);
+    FilterArt.addItem ("LowCut",   2);
+    FilterArt.addItem ("Peak",     3);
+    FilterArt.setSelectedId(1);
+    
     setSize (500, 400);
 }
 
@@ -105,8 +115,11 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     FilterTypes.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
     FilterTypes.setCentrePosition(250, 290);
     
+    // ComboBOX FilterArt
 
-
+    FilterArt.setBounds( bounds.removeFromTop(125) );
+    FilterArt.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
+    FilterArt.setCentrePosition(250, 115);
     
 }
 

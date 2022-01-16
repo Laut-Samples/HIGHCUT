@@ -84,6 +84,8 @@ public:
     
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
     
+    
+             
 //    juce::AudioProcessorValueTreeState tree; 
     
 private:
@@ -105,9 +107,10 @@ private:
     };
     
     
-    
+  
     
     void updatePeakFilter(const ChainSettings& chainSettings);
+    
     
     
     using Coefficients = Filter::CoefficientsPtr;
@@ -115,6 +118,7 @@ private:
     static void updateCoefficients(Coefficients& old, const Coefficients& replacements);
     
     template<int Index, typename ChainType, typename CoefficientsType>
+    
     void update(ChainType& chain, const CoefficientsType& coefficients)
     {
         updateCoefficients (chain.template get<Index>().coefficients, coefficients[Index]);

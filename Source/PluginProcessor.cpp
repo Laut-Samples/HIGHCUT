@@ -357,7 +357,16 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
     
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
     
-    std::make_unique<juce::AudioParameterChoice>("HighCutSlope", "HighCut Slope", juce::StringArray {"12 db/Oct","24 db/Oct","36 db/Oct","48 db/Oct",}, 0);
+    std::make_unique<juce::AudioParameterChoice>("HighCutSlope",
+                                                 "HighCut Slope",
+                                                 juce::StringArray {"12 db/Oct","24 db/Oct","36 db/Oct","48 db/Oct",}, 0);
+    
+    
+    juce::AudioParameterChoice("Filter Slope",
+                                                 "filter slope",
+                                                 juce::StringArray {"HighCut","LowCut","Peak",}, 0);
+
+    
     
     return layout;
     
