@@ -57,7 +57,7 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     addAndMakeVisible(FilterTypes);
     FilterTypes.setName("FilterTypes");
     
-    FilterTypes.addItem ("12 db/Oct",  1);
+    FilterTypes.addItem ("17 db/Oct",  1);
     FilterTypes.addItem ("24 db/Oct",  2);
     FilterTypes.addItem ("36 db/Oct", 3);
     FilterTypes.addItem ("48 db/Oct", 4);
