@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 16
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LAUT EQ HIGHCUT - Standalone Plugin", "LAUT EQ HIGHCUT_StandalonePlugin.vcxproj", "{B81D3F01-428F-27E9-2EA5-4F6B8A04D1DC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9} = {4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LAUT EQ HIGHCUT - VST3", "LAUT EQ HIGHCUT_VST3.vcxproj", "{0FC94209-1335-1020-00B8-00363032E552}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9} = {4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LAUT EQ HIGHCUT - Shared Code", "LAUT EQ HIGHCUT_SharedCode.vcxproj", "{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0FC94209-1335-1020-00B8-00363032E552}.Debug|x64.ActiveCfg = Debug|x64
+		{0FC94209-1335-1020-00B8-00363032E552}.Debug|x64.Build.0 = Debug|x64
+		{0FC94209-1335-1020-00B8-00363032E552}.Release|x64.ActiveCfg = Release|x64
+		{0FC94209-1335-1020-00B8-00363032E552}.Release|x64.Build.0 = Release|x64
+		{B81D3F01-428F-27E9-2EA5-4F6B8A04D1DC}.Debug|x64.ActiveCfg = Debug|x64
+		{B81D3F01-428F-27E9-2EA5-4F6B8A04D1DC}.Debug|x64.Build.0 = Debug|x64
+		{B81D3F01-428F-27E9-2EA5-4F6B8A04D1DC}.Release|x64.ActiveCfg = Release|x64
+		{B81D3F01-428F-27E9-2EA5-4F6B8A04D1DC}.Release|x64.Build.0 = Release|x64
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}.Debug|x64.ActiveCfg = Debug|x64
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}.Debug|x64.Build.0 = Debug|x64
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}.Release|x64.ActiveCfg = Release|x64
+		{4BEA4E3D-D072-CEC0-9A27-29C9C7C32CD9}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
