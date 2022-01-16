@@ -80,16 +80,11 @@ private:
     using APVTS = juce::AudioProcessorValueTreeState;
    
     using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
-//    std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> highCutSlopeAttachment;
     
     Attachment highCutFreqSliderAttachment;
     Attachment highCutSlopeAttachment;
     
     
-//    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> highCutSlope;
-    
-    
-//    juce::ComboBoxParameterAttachment
     
     
     

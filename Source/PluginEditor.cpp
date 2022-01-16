@@ -44,11 +44,11 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     
 
     
-//    addAndMakeVisible(controlBar);
-    
     
     
     // COMBOBOX FilterTypes
+    
+    FilterTypesAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor. apvts, "HighCut Slope", FilterTypes);
     
     
     addAndMakeVisible(highCutSlope);
@@ -57,29 +57,13 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     addAndMakeVisible(FilterTypes);
     FilterTypes.setName("FilterTypes");
     
-    FilterTypes.addItem ("17 db/Oct",  1);
+    FilterTypes.addItem ("12 db/Oct",  1);
     FilterTypes.addItem ("24 db/Oct",  2);
     FilterTypes.addItem ("36 db/Oct", 3);
     FilterTypes.addItem ("48 db/Oct", 4);
     FilterTypes.setSelectedId(1);
-//    FilterTypes.addItemList(const StringArray &stringArray, int CFStringRef)
-    
-//    makeAttachmentHelper(highCutSlopeAttachment, Names::highCutSlope, db/Oct);
-    
-    comboBox:   
-//    FilterTypes = new juce::AudioProcessorValueTreeState::ComboBoxAttachment
-    
-//    FilterTypes.addListener(highCutSlope);
-    
-//    FilterTypes = new AudioProcessorValueTreeState::ComboBoxAttachment(processor.tree, "HighCut Slope", FilterTypes )
-//    styleMenu.onChange = [this] { styleMenuChanged(); };
-//    styleMenu.setSelectedId (1);
-    
-    
-//    
-    
-//     Make sure that before the constructor has finished, you've set the
-//     editor's size to whatever you need it to be.
+
+
     setSize (500, 400);
 }
 
@@ -114,8 +98,6 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     
     auto bounds = getLocalBounds();
     
-    highCutSlope.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
-    highCutSlope.setCentrePosition(200, 200);
     
     /// ComboBOX FilterTypes
     
@@ -123,17 +105,8 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     FilterTypes.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
     FilterTypes.setCentrePosition(250, 290);
     
-//    highCutSlope.setBounds( bounds.removeFromBottom(125) );
-//    highCutSlope.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
-//    highCutSlope.setCentrePosition(250, 290);
-    
-//    void LAUTEQHIGHCUTAudioProcessorEditor::comboBoxedChanged(comboBox* box)
-//    {
-//
-//    }
 
-    
-//    highCutSlope.
+
     
 }
 
