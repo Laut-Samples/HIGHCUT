@@ -236,6 +236,10 @@ ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts)
     settings.lowCutSlope = static_cast<Slope>(apvts.getRawParameterValue("LowCut Slope")->load());
     settings.highCutSlope = static_cast<Slope>(apvts.getRawParameterValue("HighCut Slope")->load());
     
+    settings.filtershapes = apvts.getRawParameterValue("FILTERTYPES");
+    
+    getFilterTypes().setFilterType (filterarten)
+    
     return settings;
 }
 
@@ -299,8 +303,11 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
 {
     auto chainSettings = getChainSettings(apvts);
     
-    updateLowCutFilters(chainSettings);
+    // Peak
     updatePeakFilter(chainSettings);
+    
+    // Filter
+    updateLowCutFilters(chainSettings);
     updateHighCutFilters(chainSettings);
 }
 
@@ -311,15 +318,21 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
 {
     juce::AudioProcessorValueTreeState::ParameterLayout layout;
     
+    // LOW CUT
+    
     layout.add(std::make_unique<juce::AudioParameterFloat>("LowCut Freq",
                                                            "LowCut Freq",
                                                            juce::NormalisableRange<float>(20.f,20000.f, 1.f, 0.25f),
                                                            20.f));
     
+    // HIGH CUT
+    
     layout.add(std::make_unique<juce::AudioParameterFloat>("HighCut Freq",
                                                            "HighCut Freq",
                                                            juce::NormalisableRange<float>(20.f,20000.f, 1.f, 0.25f),
                                                            20000.f));  
+    
+    // PEAK 1 VON 4
     
     layout.add(std::make_unique<juce::AudioParameterFloat>("Peak Freq",
                                                            "Peak Freq",
@@ -338,33 +351,42 @@ void LAUTEQHIGHCUTAudioProcessor::updateFilters()
     
     
     
-    // FilterTypes
-    
-    juce::StringArray stringArray;
+    // FilterTypes ARRAY
+//    
+    juce::StringArray Array;
     for( int i = 0; i < 4; ++i )
     {
         juce::String str;
         str << (12 + i*12);
-        str << " db/Oct";
-        stringArray.add(str);
+        str << "db/Oct";
+        Array.add(str);
     
     }
     
-    layout.add(std::make_unique<juce::AudioParameterChoice>("LowCut Slope", "LowCut Slope", stringArray, 0 ));
-    layout.add(std::make_unique<juce::AudioParameterChoice>("HighCut Slope", "HighCut Slope", stringArray, 0 ));
+    layout.add(std::make_unique<juce::AudioParameterChoice>("LowCut Freq", "lowCut Freq", Array, 0 ));
+    layout.add(std::make_unique<juce::AudioParameterChoice>("HighCut Freq", "highCut Freq", Array, 0 ));
     
-    // IDEE
+    // FILTERTYPES COMBOBOX
     
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
     
-    std::make_unique<juce::AudioParameterChoice>("HighCutSlope",
-                                                 "HighCut Slope",
-                                                 juce::StringArray {"12 db/Oct","24 db/Oct","36 db/Oct","48 db/Oct",}, 0);
+    std::make_unique<juce::AudioParameterChoice>("FILTERTYPES",
+                                                 "fitlertypes",
+                                                 juce::StringArray
+                                                            {       "HighCut 1",
+                                                                    "HighCut 2",
+                                                                    "LowCut 1",
+                                                                    "LowCut 2", },
+                                                                    0);
     
     
-    juce::AudioParameterChoice("Filter Slope",
-                                                 "filter slope",
-                                                 juce::StringArray {"HighCut","LowCut","Peak",}, 0);
+//    juce::AudioParameterChoice("Filter Slope",
+//                                                 "filter slope",
+//                                                 juce::StringArray {"HighCut","LowCut","Peak",}, 0);
+
+    
+    
+
 
     
     

@@ -8,6 +8,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "ChainSettings.h"
 
 
 
@@ -17,9 +18,9 @@ LAUTEQHIGHCUTAudioProcessorEditor::LAUTEQHIGHCUTAudioProcessorEditor (LAUTEQHIGH
     : AudioProcessorEditor (&p), audioProcessor (p),
 
 highCutFreqSliderAttachment(audioProcessor.apvts, "HighCut Freq", highCutFreqSlider),
-highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
+highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope),
 
-//lowCutFreqSliderAttachment(audioProcessor.apvts, "LowCut Freq", lowCutFreqSlider)
+lowCutFreqSliderAttachment(audioProcessor.apvts, "LowCut Freq", lowCutFreqSlider)
 
 {
     
@@ -52,27 +53,27 @@ highCutSlopeAttachment(audioProcessor.apvts, "HighCut Slope", highCutSlope)
     
     FilterTypesAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor. apvts, "HighCut Slope", FilterTypes);
     
-    addAndMakeVisible(highCutSlope);
+//    addAndMakeVisible(highCutSlope);
     
     addAndMakeVisible(FilterTypes);
     FilterTypes.setName("FilterTypes");
     
-    FilterTypes.addItem ("12 db/Oct", 1);
-    FilterTypes.addItem ("24 db/Oct", 2);
-    FilterTypes.addItem ("36 db/Oct", 3);
-    FilterTypes.addItem ("48 db/Oct", 4);
+    FilterTypes.addItem ("HighCut", 1);
+    FilterTypes.addItem ("LowCut", 2);
+//    FilterTypes.addItem ("36 db/Oct", 3);
+//    FilterTypes.addItem ("48 db/Oct", 4);
     FilterTypes.setSelectedId(1);
 
     // Combobox FilterArt
     
-    addAndMakeVisible(FilterArt);
+//    addAndMakeVisible(FilterArt);
     
 //    FilterArtAttachment = std::make_unique<juce::AudioProcessorValueTreeState::ComboBoxAttachment>(audioProcessor. apvts, "Filter Slope", FilterArt);
 //
-    FilterArt.addItem ("HighCut",  1);
-    FilterArt.addItem ("LowCut",   2);
-    FilterArt.addItem ("Peak",     3);
-    FilterArt.setSelectedId(1);
+//    FilterArt.addItem ("HighCut",  1);
+//    FilterArt.addItem ("LowCut",   2);
+//    FilterArt.addItem ("Peak",     3);
+//    FilterArt.setSelectedId(1);
     
     setSize (500, 400);
 }
@@ -103,8 +104,8 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     mImageComponent.setBoundsRelative(0.0f, 0.0f, 1.0f, 1.0f);
     
     // HighCut
-    highCutFreqSlider.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
-    highCutFreqSlider.setCentrePosition(250, 200);
+//    highCutFreqSlider.setBoundsRelative(0.25f, 0.25f, 0.29f, 0.5f);
+//    highCutFreqSlider.setCentrePosition(250, 200);
     
     auto bounds = getLocalBounds();
     
@@ -117,9 +118,9 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
     
     // ComboBOX FilterArt
 
-    FilterArt.setBounds( bounds.removeFromTop(125) );
-    FilterArt.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
-    FilterArt.setCentrePosition(250, 115);
+//    FilterArt.setBounds( bounds.removeFromTop(125) );
+//    FilterArt.setBoundsRelative(0.05f, 0.2f, 0.2f, 0.05f);
+//    FilterArt.setCentrePosition(250, 115);
     
 }
 
@@ -128,7 +129,7 @@ void LAUTEQHIGHCUTAudioProcessorEditor::resized()
 {
     return
     {
-        &highCutFreqSlider,
+//        &highCutFreqSlider,
 //        &highCutSlope,
     };
     

@@ -9,30 +9,9 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Data/FilterData.h"
+#include "ChainSettings.h"
 
-//Filter Types
-
-enum Slope
-{
-    Slope_12,
-    Slope_24,
-    Slope_36,
-    Slope_48
-    
-};
-
-// Chain Settings
-
-struct ChainSettings
-{
-    float peakFreq { 0 }, peakGainInDecibels{0}, peakQuality {1.f};
-    float lowCutFreq { 0 }, highCutFreq { 0 };
-    
-    Slope lowCutSlope {Slope::Slope_12}, highCutSlope {Slope::Slope_12};
-};
-
-
-ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
 
 
 //==============================================================================
@@ -79,23 +58,28 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
 
     juce::AudioProcessorValueTreeState::ParameterLayout createParameterLayout();
-    
     juce::AudioProcessorValueTreeState::ComboBoxAttachment createParameter();
+
+    
     
     juce::AudioProcessorValueTreeState apvts {*this, nullptr, "Parameters", createParameterLayout()};
     
     
-             
-//    juce::AudioProcessorValueTreeState tree; 
+    FilterData& getFilter() {return filter; }
+        
     
 private:
+    
+    // USING IIR FILTER
+    FilterData filter;
+    
     using Filter = juce::dsp::IIR::Filter<float>;
     
     using CutFilter = juce::dsp::ProcessorChain<Filter, Filter, Filter, Filter>;
     
     using MonoChain = juce::dsp::ProcessorChain<CutFilter, Filter, CutFilter>;
     
-    using AlertWindow = juce::AlertWindow;
+//    using AlertWindow = juce::AlertWindow;
     
     MonoChain leftChain, rightChain;
     
@@ -117,52 +101,52 @@ private:
     
     static void updateCoefficients(Coefficients& old, const Coefficients& replacements);
     
-    template<int Index, typename ChainType, typename CoefficientsType>
+//    template<int Index, typename ChainType, typename CoefficientsType>
     
-    void update(ChainType& chain, const CoefficientsType& coefficients)
-    {
-        updateCoefficients (chain.template get<Index>().coefficients, coefficients[Index]);
-        chain.template setBypassed<Index>(false);
-    }
+//    void update(ChainType& chain, const CoefficientsType& coefficients)
+//    {
+//        updateCoefficients (chain.template get<Index>().coefficients, coefficients[Index]);
+//        chain.template setBypassed<Index>(false);
+//    }
     
-    template<typename ChainType, typename CoefficientsType>
-    
-    
-    
-    void updateCutFilter(ChainType& leftLowCut,
-                         const CoefficientsType& cutCoefficients,
-                         const Slope& lowCutSlope)
-    {
-        
-        
-            leftLowCut.template setBypassed<0>(true);
-            leftLowCut.template setBypassed<1>(true);
-            leftLowCut.template setBypassed<2>(true);
-            leftLowCut.template setBypassed<3>(true);
-        
-            switch( lowCutSlope )
-            {
-                    
-                case Slope_48:
-                {
-                    update<3>(leftLowCut, cutCoefficients);
-
-                }
-                case Slope_36:
-                {
-                    update<2>(leftLowCut, cutCoefficients);
-                }
-                case Slope_24:
-                {
-                    update<1>(leftLowCut, cutCoefficients);
-                }
-                case Slope_12:
-                {
-                    update<0>(leftLowCut, cutCoefficients);
-                }
-
-            }
-    }
+//    template<typename ChainType, typename CoefficientsType>
+//
+//
+//
+//    void updateCutFilter(ChainType& leftLowCut,
+//                         const CoefficientsType& cutCoefficients,
+//                         const Slope& lowCutSlope)
+//    {
+//
+//
+//            leftLowCut.template setBypassed<0>(true);
+//            leftLowCut.template setBypassed<1>(true);
+//            leftLowCut.template setBypassed<2>(true);
+//            leftLowCut.template setBypassed<3>(true);
+//
+//            switch( lowCutSlope )
+//            {
+//
+//                case Slope_48:
+//                {
+//                    update<3>(leftLowCut, cutCoefficients);
+//
+//                }
+//                case Slope_36:
+//                {
+//                    update<2>(leftLowCut, cutCoefficients);
+//                }
+//                case Slope_24:
+//                {
+//                    update<1>(leftLowCut, cutCoefficients);
+//                }
+//                case Slope_12:
+//                {
+//                    update<0>(leftLowCut, cutCoefficients);
+//                }
+//
+//            }
+//    }
     
     void updateLowCutFilters(const ChainSettings& chainSettings);
     void updateHighCutFilters(const ChainSettings& chainSettings);

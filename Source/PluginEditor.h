@@ -18,8 +18,6 @@ struct LookAndFeel : juce::LookAndFeel_V4
     
     
 };
-
-
 //==============================================================================
 struct ComboBox : juce::ComboBox
 {
@@ -52,11 +50,6 @@ public:
     void paint (juce::Graphics&) override;
     void resized() override;
     
-//    juce::ScopedPointer<juce::AudioProcessorValueTreeState::SliderAttachment> highCutSlope;
-    
-    
-
-    
 private:
     // This reference is provided as a quick way for your editor to
     // access the processor object that created it.
@@ -68,26 +61,24 @@ private:
     // Image
     juce::ImageComponent mImageComponent;
     
-    //Slider
-    CustomRotarySlider highCutFreqSlider, highCutSlope, lowCutFreqSlider;
-    
-    
+    // ComboBox
     ComboBox FilterTypes;
-    
-    ComboBox FilterArt;
     
     std::unique_ptr<juce::AudioProcessorValueTreeState::ComboBoxAttachment> FilterTypesAttachment;
 
     
-    std::vector<juce::Component*>getComps();
+    ChainSettings getChainSettings(juce::AudioProcessorValueTreeState& apvts);
     
+    std::vector<juce::Component*>getComps();
     using APVTS = juce::AudioProcessorValueTreeState;
-   
+    
+    
+    // ComboBox
     using Attachment = juce::AudioProcessorValueTreeState::SliderAttachment;
     
     Attachment highCutFreqSliderAttachment;
     Attachment highCutSlopeAttachment;
-//    Attachment lowCutFreqSliderAttachment;
+    Attachment lowCutFreqSliderAttachment;
     
     
     
